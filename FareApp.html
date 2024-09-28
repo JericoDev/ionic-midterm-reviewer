@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Fare Calculator</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Fare Calculator</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <form id="fareForm">
+      <ion-item>
+        <ion-label position="floating">Distance</ion-label><br>
+        <ion-input type="number" id="distanceInput"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Rate per km</ion-label><br>
+        <ion-input type="number" id="rateInput"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tax (%)</ion-label><br>
+        <ion-input type="number" id="taxInput" value="0"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" onclick="calculateFare()">Calculate Fare</ion-button>
+    </form>
+
+    <div id="fareResult" style="display:none; margin-top:20px;">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Total Fare</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="fareDisplay"></ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+
+  <script>
+    function calculateFare() {
+      // Get the values from inputs
+      const distance = parseFloat(document.getElementById('distanceInput').value);
+      const rate = parseFloat(document.getElementById('rateInput').value);
+      const tax = parseFloat(document.getElementById('taxInput').value);
+
+      // Basic fare calculation
+      let fare = distance * rate;
+
+      // Apply tax (if any)
+      const taxAmount = (tax / 100) * fare;
+      fare = fare + taxAmount;
+
+      // Display the calculated fare
+      const fareDisplay = document.getElementById('fareDisplay');
+      fareDisplay.innerHTML = `Total Fare: ${fare} currency units`;
+
+      // Show the result section
+      document.getElementById('fareResult').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

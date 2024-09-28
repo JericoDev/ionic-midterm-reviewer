@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select App</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Select App</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+     
+    <ion-list>
+        <ion-item>
+            <ion-select label="Default label" id="fruits" placeholder="Fruits" (ionChange)="myFunction()">
+                <ion-select-option value="apple">Apple</ion-select-option>
+                <ion-select-option value="banana">Banana</ion-select-option>
+                <ion-select-option value="orange">Orange</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <!-- Target display -->
+        <ion-item id="disContent" style="display:none;">
+            <ion-input type="number" placeholder="Price of Fruit"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <!-- <ion-button expand="block" onclick="trig()">Process Operation</ion-button> -->
+
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Display Result</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="res"></ion-card-content>
+      </ion-card>
+    </div>
+
+  </ion-content>
+
+
+<script>
+document.getElementById("fruits").addEventListener("ionChange", myFunction)
+
+function myFunction() {
+    let fruits = document.getElementById("fruits").value
+    document.getElementById("res").innerHTML = fruits
+    let disContent = document.getElementById("disContent")
+    if (fruits == "apple"){
+        disContent.style.display = "block"
+    } else {
+        alert("I dont like this fruit, i only like apple")
+        disContent.style.display = "none"
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    // function trig(){
+    //     const fruits = document.getElementById('fruits').value
+    //     // console.log(fruits)
+    //     document.getElementById('res').innerHTML = fruits
+
+    //     if(fruits == "apple"){
+    //       console.log("i have the best fruit")
+    //     } else {
+    //       console.log("not my favorite fruit")
+    //     }
+      
+    // }
+  
+  </script>
+
+
+</body>
+</html>

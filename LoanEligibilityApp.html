@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ionic Loan Eligibility Checker</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@latest/css/ionic.bundle.css"/>
+  
+</head>
+<body>
+
+  <ion-app>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Loan Eligibility</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="floating">Monthly Income</ion-label><br>
+        <ion-input id="income" type="number" placeholder="Enter your income"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Loan Type</ion-label>
+        <ion-select id="loanType" placeholder="Select Loan Type">
+          <ion-select-option value="Personal">Personal Loan</ion-select-option>
+          <ion-select-option value="Home">Home Loan</ion-select-option>
+          <ion-select-option value="Auto">Auto Loan</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Existing Debts</ion-label>
+        <ion-checkbox id="debts"></ion-checkbox>
+      </ion-item>
+
+      <ion-button expand="block" onclick="checkEligibility()">Check Eligibility</ion-button>
+
+      <ion-textarea readonly id="result" placeholder="Your eligibility result will appear here..."></ion-textarea>
+
+    </ion-content>
+  </ion-app>
+
+  <script>
+    function checkEligibility() {
+      const income = document.getElementById('income').value;
+      const loanType = document.getElementById('loanType').value;
+      const hasDebts = document.getElementById('debts');
+      const resultArea = document.getElementById('result');
+
+      if (income === "" || loanType === "") {
+        resultArea.innerHTML = "Please enter your income and select a loan type.";
+        return;
+      }
+
+      let maxLoanAmount = 0;
+      
+      if (loanType === "Personal") {
+        maxLoanAmount = income * 10;
+      } else if (loanType === "Home") {
+        maxLoanAmount = income * 20;
+      } else if (loanType === "Auto") {
+        maxLoanAmount = income * 15;
+      }
+
+      if (hasDebts.checked) {
+        maxLoanAmount *= 0.7;  // Reduce loan amount by 
+      }
+
+      resultArea.innerHTML = `You are eligible for a loan of up to <br> PHP ${maxLoanAmount.toFixed(2)}`
+    }
+  </script>
+
+</body>
+</html>
